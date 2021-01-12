@@ -41,6 +41,7 @@ namespace TechJobsConsole
                     else
                     {
                         List<string> results = JobData.FindAll(columnChoice);
+                        results.Sort();
 
                         Console.WriteLine("\n*** All " + columnChoices[columnChoice] + " Values ***");
                         foreach (string item in results)
@@ -63,7 +64,9 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
+                        //Console.WriteLine("Search all fields not yet implemented.");
                     }
                     else
                     {
@@ -100,6 +103,7 @@ namespace TechJobsConsole
                 }
 
                 string input = Console.ReadLine();
+
                 choiceIdx = int.Parse(input);
 
                 if (choiceIdx < 0 || choiceIdx >= choiceKeys.Length)
@@ -129,10 +133,11 @@ namespace TechJobsConsole
                     }
                     Console.WriteLine("*******\n");
                 }
+                
             }
             else
             {
-                Console.WriteLine("There are no results matching that criteria");
+                Console.WriteLine("*******\nThere are no results matching that criteria.\n*******");
             }
            
         }
